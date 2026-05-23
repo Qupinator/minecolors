@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+    <title>Minecraft Colors & Styles</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Minecraft';
+        }
+        
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('minecraft.ttf');
+        }
+        
+        body {
+            background: #1a1a1a;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            padding: 10px;
+            letter-spacing: 0.4px;
+            font-size: 15px;
+            -webkit-font-smoothing: none;
+            -moz-osx-font-smoothing: unset;
+            font-family: 'Minecraft';
+        }
+        
+        button {
+            font-family: 'Minecraft';
+        }
+
+        .container {
+            max-width: 700px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 1px dashed #3f3f3f;
+            padding-bottom: 8px;
+            margin-bottom: 4px;
+        }
+        .header h1 {
+            font-size: 0.8rem;
+            color: #ffd966;
+            text-shadow: 2px 2px 0 #000;
+            margin-bottom: 2px;
+            cursor: default;
+        }
+        .header p {
+            font-size: 0.35rem;
+            color: #cccccc;
+        }
+
+        .section {
+            background: #252525;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 12px 10px;
+        }
+        .section-title {
+            font-size: 0.5rem;
+            color: #ffffff;
+            margin-bottom: 10px;
+            padding-left: 5px;
+            border-left: 3px solid #ffd966;
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+        }
+
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        @media (max-width: 500px) {
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .format-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            .picker-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        .color-card {
+            background: #2a2a2a;
+            border: 1px solid #3f3f3f;
+            border-radius: 7px;
+            padding: 6px 6px;
+            cursor: pointer;
+            transition: background 0.15s;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 6px;
+            text-align: left;
+        }
+        .color-card:hover {
+            background: #333;
+        }
+        .color-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+            min-width: 0;
+        }
+        .color-code {
+            width: fit-content;
+            font-size: 0.7rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 0 #000;
+            background: #111;
+            padding: 2px 3px;
+            border-radius: 3px;
+        }
+        .color-name {
+            font-size: 0.6rem;
+            color: #ffffff;
+            text-shadow: 1px 1px 0 #000;
+        }
+        .color-hex {
+            font-size: 0.58rem;
+            color: #ffffff;
+            opacity: 0.8;
+        }
+        .color-swatch {
+            width: 32px;
+            height: 32px;
+            border-radius: 5px;
+            border: 0px solid #555;
+            flex-shrink: 0;
+        }
+
+        /* Палитра */
+        .picker-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        .picker-swatch-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+        }
+        .picker-swatch {
+            width: 68px;
+            height: 68px;
+            background: #ff5555;
+            border-radius: 4px;
+            border: 2px solid #4a4a4a;
+            cursor: pointer;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .pencil-icon {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 0.7rem;
+            color: #fff;
+            opacity: 0.8;
+            pointer-events: none;
+            text-shadow: 1px 1px 0 #000;
+        }
+        .closest-mc {
+            font-size: 0.32rem;
+            color: #ffd966;
+            background: #1e1e1e;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid #3a3a3a;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .info-line .closest-mc {
+            flex: 1;
+            text-align: center;
+        }
+        .picker-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .info-line {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .info-label {
+            font-size: 0.32rem;
+            color: #ffffff;
+            width: 32px;
+        }
+        .info-value {
+            font-size: 0.4rem;
+            background: #1e1e1e;
+            padding: 5px 8px;
+            border-radius: 3px;
+            border: 1px solid #3a3a3a;
+            color: #ffffff;
+            cursor: pointer;
+            transition: background 0.15s;
+            flex: 1;
+            text-align: center;
+            word-break: break-all;
+        }
+        .info-value:hover {
+            background: #2c2c2c;
+        }
+
+        /* Чат */
+        .chat-preview {
+            background: #111;
+            border: 1px solid #3a3a3a;
+            border-radius: 4px;
+            padding: 8px 10px;
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: #fff;
+            margin-top: 8px;
+            word-break: break-all;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            gap: 2px;
+        }
+        .chat-time {
+            color: #aaa;
+            margin-right: 4px;
+        }
+        .chat-nick {
+            transition: color 0.2s;
+            cursor: default;
+        }
+        .chat-arrow {
+            margin: 0 4px;
+            color: #555555;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .chat-msg {
+            transition: color 0.2s;
+        }
+
+        .toggle-toolbar {
+            display: flex;
+            gap: 5px;
+            margin-top: 10px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+        
+        .toggle-toolbar .color-row {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .toggle-btn {
+            font-size: 0.7rem;
+            padding: 6px 12px;
+            background: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid #4a4a4a;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-transform: uppercase;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            user-select: none;
+        }
+        .toggle-btn.active {
+            background: #ffd966;
+            color: #1a1a1a;
+            border-color: #ffd966;
+            font-weight: bold;
+        }
+        .toggle-btn:hover {
+            background: #3f3f3f;
+        }
+        .toggle-btn.active:hover {
+            background: #ffd966;
+        }
+        .btn-copy {
+            background: #2d2d2d;
+            color: #ffffff;
+            border: 1px solid #4a4a4a;
+        }
+        .btn-copy:hover {
+            background: #3f3f3f;
+        }
+
+        /* Форматирование */
+        .format-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        .format-card {
+            background: #2a2a2a;
+            border: 1px solid #3f3f3f;
+            border-radius: 3px;
+            padding: 8px 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            transition: background 0.15s;
+            position: relative;
+        }
+        .format-card:hover {
+            background: #333;
+        }
+        .format-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .format-code-name {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .format-code {
+            font-size: 0.8rem;
+            color: #ffffff;
+            background: #1e1e1e;
+            padding: 2px 6px;
+            border-radius: 2px;
+            letter-spacing: 0.6px;
+        }
+        .format-desc {
+            font-size: 0.6rem;
+            color: #ffffff;
+        }
+        .copy-icon-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            padding: 2px;
+            line-height: 1;
+            transition: color 0.15s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 2px;
+        }
+        .copy-icon-btn:hover {
+            color: #ffd966;
+            background: #333;
+        }
+        .format-preview {
+            font-size: 0.8rem;
+            padding: 4px 6px;
+            border-radius: 2px;
+            background: #111;
+            text-align: center;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: #ffffff;
+        }
+        .bold-text { font-weight: bolder; }
+        .italic-text { font-style: italic; }
+        .underline-text { text-decoration: underline; }
+        .strike-text { text-decoration: line-through; }
+        .obfuscated-text {
+            letter-spacing: 0;
+            animation: obfuscate 0.1s steps(1) infinite;
+        }
+        @keyframes obfuscate {
+            0% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 25px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #333;
+            color: #ffd966;
+            font-size: 0.4rem;
+            padding: 8px 18px;
+            border-radius: 20px;
+            border: 1px solid #5a5a5a;
+            z-index: 999;
+            opacity: 0;
+            transition: transform 0.2s, opacity 0.2s;
+            pointer-events: none;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Режим F3 */
+        #debugOverlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            color: #0f0;
+            font-family: 'Minecraft', monospace;
+            z-index: 1000;
+            pointer-events: none;
+            padding: 20px;
+            flex-direction: column;
+            gap: 8px;
+            font-size: 0.5rem;
+            line-height: 1.4;
+        }
+
+        #hiddenColorInput {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+            width: 0;
+            height: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 Minecraft Colors</h1>
+            <p>&0-&f · &l&o&n&m&k&r</p>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🌈 16 цветов</div>
+            <div class="color-grid" id="colorGrid"></div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">🎨 Палитра и чат</div>
+            <div class="picker-row">
+                <div class="picker-swatch-area">
+                    <div class="picker-swatch" id="pickerSwatch" title="Выбрать цвет">
+                        <i class="bi bi-pencil-fill pencil-icon"></i>
+                    </div>
+                </div>
+                <div class="picker-info">
+                    <div class="info-line">
+                        <span class="info-label">HEX</span>
+                        <span class="info-value" id="infoHex">#FF5555</span>
+                    </div>
+                    <div class="info-line">
+                        <span class="info-label">RGB</span>
+                        <span class="info-value" id="infoRgb">rgb(255,85,85)</span>
+                    </div>
+                    <div class="info-line">
+                        <span class="closest-mc" id="closestMc">&c Красный</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-preview" id="chatPreview">
+                <span class="chat-time" id="chatTime">--:--</span>
+                <span class="chat-nick" id="chatNick">Qupinator</span>
+                <span class="chat-arrow" id="chatArrow">»</span>
+                <span class="chat-msg" id="chatMsg">Кто алмазы спиздил?</span>
+            </div>
+            <div class="toggle-toolbar">
+                <div class="color-row">
+                    <button class="toggle-btn active" data-target="nick">Ник</button>
+                    <button class="toggle-btn" data-target="msg">Сообщение</button>
+                </div>
+                <button class="toggle-btn btn-copy" id="copyMcBtn"><i class="bi bi-clipboard"></i> Копировать код</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <div class="section-title">✨ Форматирование</div>
+            <div class="format-grid" id="formatGrid"></div>
+        </div>
+    </div>
+
+    <input type="color" id="hiddenColorInput" value="#ff5555">
+    <div class="toast" id="toast">Скопировано!</div>
+
+    <div id="debugOverlay">
+        <div>Minecraft Colors v1.0 (debug)</div>
+        <div>XYZ: 42.0 / 7.0 / -13.0</div>
+        <div>Chunk: 2 0 -1 in 0 0</div>
+        <div>Facing: north (Towards negative Z)</div>
+        <div>Client brand: vanilla</div>
+        <div>FPS: 60</div>
+    </div>
+
+    <script>
+        (function() {
+            // Easter egg: console message
+            console.log("Notch approves this website. 🟩🟩🟩");
+            console.log("%c       \n  ▄▄█▀▀▀▀▀█▄▄  \n ▄█▀      ▀█▄ \n █          █ \n █   ████   █ \n █   █  █   █ \n ▀█▄       ▄█▀ \n  ▀▀█▄▄▄▄▄█▀▀  \n%cCreeper aw man", "color:green;", "color:white;");
+
+            const mcColors = [
+                { code: '&0', name: 'Чёрный', hex: '#000000' },
+                { code: '&1', name: 'Тёмно-синий', hex: '#0000AA' },
+                { code: '&2', name: 'Тёмно-зелёный', hex: '#00AA00' },
+                { code: '&3', name: 'Тёмно-аква', hex: '#00AAAA' },
+                { code: '&4', name: 'Тёмно-красный', hex: '#AA0000' },
+                { code: '&5', name: 'Тёмно-пурпурный', hex: '#AA00AA' },
+                { code: '&6', name: 'Золотой', hex: '#FFAA00' },
+                { code: '&7', name: 'Серый', hex: '#AAAAAA' },
+                { code: '&8', name: 'Тёмно-серый', hex: '#555555' },
+                { code: '&9', name: 'Синий', hex: '#5555FF' },
+                { code: '&a', name: 'Зелёный', hex: '#55FF55' },
+                { code: '&b', name: 'Аква', hex: '#55FFFF' },
+                { code: '&c', name: 'Красный', hex: '#FF5555' },
+                { code: '&d', name: 'Светло-пурпурный', hex: '#FF55FF' },
+                { code: '&e', name: 'Жёлтый', hex: '#FFFF55' },
+                { code: '&f', name: 'Белый', hex: '#FFFFFF' }
+            ];
+
+            const formatCodes = [
+                { code: '&l', name: 'Жирный', cssClass: 'bold-text', preview: 'Bold' },
+                { code: '&o', name: 'Курсив', cssClass: 'italic-text', preview: 'Italic' },
+                { code: '&n', name: 'Подчёркнутый', cssClass: 'underline-text', preview: 'Underline' },
+                { code: '&m', name: 'Зачёркнутый', cssClass: 'strike-text', preview: 'Strike' },
+                { code: '&k', name: 'Запутанный', cssClass: 'obfuscated-text', preview: 'Obfusc' },
+                { code: '&r', name: 'Сброс', cssClass: '', preview: 'Reset' }
+            ];
+
+            const specialMessages = [
+                { hour: 20, minute: 31, text: 'Прибыл Годжо Сатору' },
+                { hour: 8, minute: 8, text: 'Пора срать' }
+            ];
+            const defaultMessage = 'Кто алмазы спиздил?';
+
+            const colorGrid = document.getElementById('colorGrid');
+            const pickerSwatch = document.getElementById('pickerSwatch');
+            const hiddenInput = document.getElementById('hiddenColorInput');
+            const infoHex = document.getElementById('infoHex');
+            const infoRgb = document.getElementById('infoRgb');
+            const closestMc = document.getElementById('closestMc');
+            const copyMcBtn = document.getElementById('copyMcBtn');
+            const chatNick = document.getElementById('chatNick');
+            const chatMsg = document.getElementById('chatMsg');
+            const chatTime = document.getElementById('chatTime');
+            const chatArrow = document.getElementById('chatArrow');
+            const toast = document.getElementById('toast');
+            const formatGrid = document.getElementById('formatGrid');
+            const toggleButtons = document.querySelectorAll('.toggle-btn[data-target]');
+            const debugOverlay = document.getElementById('debugOverlay');
+
+            let currentHex = '#FF5555';
+            let currentTarget = 'msg';
+            let toastTimer = null;
+            let zovTimeout = null;
+            let herobrineTimeout = null;
+
+            // Easter egg sequence
+            const secretSequence = ['&f', '&9', '&c'];
+            let sequenceIndex = 0;
+
+            function hexToRgb(hex) {
+                const h = hex.replace('#', '');
+                return {
+                    r: parseInt(h.substring(0, 2), 16),
+                    g: parseInt(h.substring(2, 4), 16),
+                    b: parseInt(h.substring(4, 6), 16)
+                };
+            }
+
+            function findClosestMC(hex) {
+                const target = hexToRgb(hex);
+                let best = Infinity, bestColor = mcColors[0];
+                mcColors.forEach(mc => {
+                    const m = hexToRgb(mc.hex);
+                    const d = Math.sqrt((target.r - m.r) ** 2 + (target.g - m.g) ** 2 + (target.b - m.b) ** 2);
+                    if (d < best) { best = d; bestColor = mc; }
+                });
+                return bestColor;
+            }
+
+            function showToast(msg) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toast.textContent = msg;
+                toast.classList.add('show');
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('show');
+                    toastTimer = null;
+                }, 1500);
+            }
+
+            async function copyText(text) {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    showToast('📋 Скопировано');
+                } catch {
+                    const ta = document.createElement('textarea');
+                    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+                    document.body.appendChild(ta); ta.select();
+                    document.execCommand('copy'); document.body.removeChild(ta);
+                    showToast('📋 Скопировано');
+                }
+            }
+
+            function updateColorTarget() {
+                chatNick.style.color = '';
+                chatMsg.style.color = '';
+                if (currentTarget === 'nick') {
+                    chatNick.style.color = currentHex;
+                } else {
+                    chatMsg.style.color = currentHex;
+                }
+                toggleButtons.forEach(btn => {
+                    const target = btn.getAttribute('data-target');
+                    if (target === currentTarget) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                });
+            }
+
+            function updatePicker(hex) {
+                currentHex = hex;
+                pickerSwatch.style.background = hex;
+                hiddenInput.value = hex;
+                const rgb = hexToRgb(hex);
+                const rgbStr = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+                infoHex.textContent = hex.toUpperCase();
+                infoRgb.textContent = rgbStr;
+                const closest = findClosestMC(hex);
+                closestMc.innerHTML = `${closest.code} ${closest.name}`;
+                updateColorTarget();
+            }
+
+            function updateMessage() {
+                const now = new Date();
+                const h = now.getHours();
+                const m = now.getMinutes();
+                let message = defaultMessage;
+                for (let sp of specialMessages) {
+                    if (h === sp.hour && m === sp.minute) { message = sp.text; break; }
+                }
+                // Если активна пасхалка "ZOV", не переопределяем
+                if (window.zovActive) return;
+                chatMsg.textContent = message;
+            }
+
+            function updateClock() {
+                const now = new Date();
+                const hh = String(now.getHours()).padStart(2, '0');
+                const mm = String(now.getMinutes()).padStart(2, '0');
+                chatTime.textContent = `[${hh}:${mm}]`;
+                updateMessage();
+            }
+
+            updateClock();
+            setInterval(updateClock, 15000);
+
+            // Пасхалка "ZOV" по последовательности цветов
+            function triggerZOV() {
+                if (zovTimeout) clearTimeout(zovTimeout);
+                chatMsg.textContent = 'ZOV';
+                window.zovActive = true;
+                zovTimeout = setTimeout(() => {
+                    window.zovActive = false;
+                    updateMessage();
+                    zovTimeout = null;
+                }, 10000);
+            }
+
+            function buildColors() {
+                colorGrid.innerHTML = '';
+                mcColors.forEach(mc => {
+                    const card = document.createElement('div');
+                    card.className = 'color-card';
+                    card.innerHTML = `
+                        <div class="color-info">
+                            <div class="color-row">
+                                <span class="color-code">${mc.code}</span>
+                                <span class="color-hex">${mc.hex}</span>
+                            </div>
+                            <span class="color-name">${mc.name}</span>
+                        </div>
+                        <div class="color-swatch" style="background:${mc.hex};"></div>
+                    `;
+                    card.addEventListener('click', () => {
+                        updatePicker(mc.hex);
+                        copyText(mc.code);
+
+                        // Проверка последовательности
+                        if (mc.code === secretSequence[sequenceIndex]) {
+                            sequenceIndex++;
+                            if (sequenceIndex === secretSequence.length) {
+                                triggerZOV();
+                                sequenceIndex = 0;
+                            }
+                        } else {
+                            sequenceIndex = 0;
+                        }
+                    });
+                    colorGrid.appendChild(card);
+                });
+            }
+
+            function buildFormats() {
+                formatGrid.innerHTML = '';
+                formatCodes.forEach(fc => {
+                    const card = document.createElement('div');
+                    card.className = 'format-card';
+                    const previewClass = fc.cssClass ? ` ${fc.cssClass}` : '';
+                    card.innerHTML = `
+                        <div class="format-header">
+                            <div class="format-code-name">
+                                <span class="format-code">${fc.code}</span>
+                                <span class="format-desc">${fc.name}</span>
+                            </div>
+                            <button class="copy-icon-btn" title="Копировать"><i class="bi bi-clipboard"></i></button>
+                        </div>
+                        <div class="format-preview${previewClass}">${fc.preview}</div>
+                    `;
+                    const copyBtn = card.querySelector('.copy-icon-btn');
+                    copyBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        copyText(fc.code);
+                    });
+                    card.addEventListener('click', () => copyText(fc.code));
+                    formatGrid.appendChild(card);
+                });
+            }
+
+            // Пасхалка с ником (двойной клик)
+            chatNick.addEventListener('dblclick', () => {
+                if (herobrineTimeout) clearTimeout(herobrineTimeout);
+                chatNick.textContent = 'Herobrine';
+                herobrineTimeout = setTimeout(() => {
+                    chatNick.textContent = 'Qupinator';
+                    herobrineTimeout = null;
+                }, 10000);
+            });
+
+            // Пасхалка со стрелкой
+            chatArrow.addEventListener('click', () => {
+                chatArrow.innerHTML = '<i class="bi bi-minecart"></i>';
+                setTimeout(() => {
+                    chatArrow.textContent = '»';
+                }, 1000);
+            });
+
+            // Режим F3
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'F3' || e.keyCode === 114) {
+                    e.preventDefault();
+                    debugOverlay.style.display = 'flex';
+                }
+            });
+            document.addEventListener('keyup', (e) => {
+                if (e.key === 'F3' || e.keyCode === 114) {
+                    debugOverlay.style.display = 'none';
+                }
+            });
+            // Долгий тап по заголовку для мобильных
+            const headerTitle = document.querySelector('.header h1');
+            let pressTimer;
+            headerTitle.addEventListener('touchstart', () => {
+                pressTimer = setTimeout(() => {
+                    debugOverlay.style.display = 'flex';
+                    setTimeout(() => { debugOverlay.style.display = 'none'; }, 3000);
+                }, 800);
+            });
+            headerTitle.addEventListener('touchend', () => clearTimeout(pressTimer));
+            headerTitle.addEventListener('touchmove', () => clearTimeout(pressTimer));
+
+            // Переключение цели
+            toggleButtons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const target = btn.getAttribute('data-target');
+                    if (target && target !== currentTarget) {
+                        currentTarget = target;
+                        updateColorTarget();
+                    }
+                });
+            });
+
+            copyMcBtn.addEventListener('click', () => {
+                const closest = findClosestMC(currentHex);
+                copyText(closest.code);
+            });
+
+            pickerSwatch.addEventListener('click', () => hiddenInput.click());
+            hiddenInput.addEventListener('input', () => updatePicker(hiddenInput.value));
+            hiddenInput.addEventListener('change', () => updatePicker(hiddenInput.value));
+
+            [infoHex, infoRgb].forEach(el => {
+                el.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const val = el.textContent;
+                    if (val) copyText(val);
+                });
+            });
+
+            buildColors();
+            buildFormats();
+            updatePicker('#FF5555');
+            updateColorTarget();
+            updateMessage();
+
+            // Обфускация
+            const obfEls = document.querySelectorAll('.obfuscated-text');
+            if (obfEls.length) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+                setInterval(() => {
+                    obfEls.forEach(el => {
+                        const original = el.getAttribute('data-original') || el.textContent;
+                        if (!el.getAttribute('data-original')) el.setAttribute('data-original', original);
+                        let str = '';
+                        for (let i = 0; i < original.length; i++) {
+                            str += chars[Math.floor(Math.random() * chars.length)];
+                        }
+                        el.textContent = str;
+                    });
+                }, 80);
+            }
+        })();
+    </script>
+</body>
+</html>

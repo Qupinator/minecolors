@@ -105,10 +105,6 @@
             .format-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
             }
-            .picker-main {
-                flex-direction: column;
-                align-items: flex-start;
-            }
         }
         .color-card {
             background: #2a2a2a;
@@ -171,73 +167,92 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            flex: 0 0 auto;
         }
         .picker-swatch {
-            width: 68px;
-            height: 68px;
             background: #ff5555;
             border-radius: 4px;
             border: 2px solid #4a4a4a;
             cursor: pointer;
-            flex-shrink: 0;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .pencil-icon {
-            position: absolute;
-            bottom: 2px;
-            right: 2px;
-            font-size: 0.7rem;
+            font-size: 3rem;
             color: #fff;
-            opacity: 0.8;
+            opacity: 0.9;
             pointer-events: none;
-            text-shadow: 1px 1px 0 #000;
+            text-shadow: 0px 0px 20px #555;
+            position: absolute;
         }
         .closest-mc {
-            font-size: 0.32rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 109px;
+            font-size: 0.4rem;
             color: #ffd966;
             background: #1e1e1e;
-            padding: 5px 8px;
+            padding: 6px 5px;
             border-radius: 3px;
             border: 1px solid #3a3a3a;
-            text-align: center;
             white-space: nowrap;
-        }
-        .info-line .closest-mc {
-            flex: 1;
-            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 30px;
         }
         .picker-info {
             flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
         }
         .info-line {
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
         .info-label {
-            font-size: 0.32rem;
+            font-size: 0.45rem;
             color: #ffffff;
-            width: 32px;
+            width: 50px;
+            text-transform: uppercase;
         }
         .info-value {
-            font-size: 0.4rem;
+            flex: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             background: #1e1e1e;
-            padding: 5px 8px;
+            padding: 6px 10px;
             border-radius: 3px;
             border: 1px solid #3a3a3a;
             color: #ffffff;
-            cursor: pointer;
-            transition: background 0.15s;
-            flex: 1;
-            text-align: center;
+            font-size: 0.55rem;
             word-break: break-all;
         }
-        .info-value:hover {
-            background: #2c2c2c;
+        .info-value span {
+            flex: 1;
+            text-align: left;
+        }
+        .info-copy-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 2px;
+            line-height: 1;
+            transition: color 0.15s;
+            flex-shrink: 0;
+            margin-left: 6px;
+        }
+        .info-copy-btn:hover {
+            color: #ffd966;
         }
 
         /* Чат */
@@ -246,7 +261,7 @@
             border: 1px solid #3a3a3a;
             border-radius: 4px;
             padding: 8px 10px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             line-height: 1.6;
             color: #fff;
             margin-top: 8px;
@@ -272,6 +287,18 @@
         }
         .chat-msg {
             transition: color 0.2s;
+        }
+        .bold-text { font-weight: bolder; }
+        .italic-text { font-style: italic; }
+        .underline-text { text-decoration: underline; }
+        .strike-text { text-decoration: line-through; }
+        .obfuscated-text {
+            letter-spacing: 0;
+            animation: obfuscate 0.1s steps(1) infinite;
+        }
+        @keyframes obfuscate {
+            0% { opacity: 1; }
+            100% { opacity: 0.8; }
         }
 
         .toggle-toolbar {
@@ -397,18 +424,6 @@
             text-overflow: ellipsis;
             color: #ffffff;
         }
-        .bold-text { font-weight: bolder; }
-        .italic-text { font-style: italic; }
-        .underline-text { text-decoration: underline; }
-        .strike-text { text-decoration: line-through; }
-        .obfuscated-text {
-            letter-spacing: 0;
-            animation: obfuscate 0.1s steps(1) infinite;
-        }
-        @keyframes obfuscate {
-            0% { opacity: 1; }
-            100% { opacity: 0.8; }
-        }
 
         .toast {
             position: fixed;
@@ -431,7 +446,6 @@
             opacity: 1;
         }
 
-        /* Режим F3 */
         #debugOverlay {
             display: none;
             position: fixed;
@@ -477,20 +491,38 @@
             <div class="picker-row">
                 <div class="picker-swatch-area">
                     <div class="picker-swatch" id="pickerSwatch" title="Выбрать цвет">
-                        <i class="bi bi-pencil-fill pencil-icon"></i>
+                        <i class="bi bi-pencil pencil-icon"></i>
                     </div>
+                    <div class="closest-mc" id="closestMc">&c Красный</div>
                 </div>
-                <div class="picker-info">
+                <div class="picker-info" id="pickerInfo">
                     <div class="info-line">
                         <span class="info-label">HEX</span>
-                        <span class="info-value" id="infoHex">#FF5555</span>
+                        <div class="info-value">
+                            <span id="infoHex">#FF5555</span>
+                            <button class="info-copy-btn" title="Копировать"><i class="bi bi-copy"></i></button>
+                        </div>
+                    </div>
+                    <div class="info-line">
+                        <span class="info-label">§ код</span>
+                        <div class="info-value">
+                            <span id="infoSection">§c</span>
+                            <button class="info-copy-btn" title="Копировать"><i class="bi bi-copy"></i></button>
+                        </div>
                     </div>
                     <div class="info-line">
                         <span class="info-label">RGB</span>
-                        <span class="info-value" id="infoRgb">rgb(255,85,85)</span>
+                        <div class="info-value">
+                            <span id="infoRgb">rgb(255,85,85)</span>
+                            <button class="info-copy-btn" title="Копировать"><i class="bi bi-copy"></i></button>
+                        </div>
                     </div>
                     <div class="info-line">
-                        <span class="closest-mc" id="closestMc">&c Красный</span>
+                        <span class="info-label">Unicode</span>
+                        <div class="info-value">
+                            <span id="infoUnicode">\u00A7c</span>
+                            <button class="info-copy-btn" title="Копировать"><i class="bi bi-copy"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -505,7 +537,7 @@
                     <button class="toggle-btn active" data-target="nick">Ник</button>
                     <button class="toggle-btn" data-target="msg">Сообщение</button>
                 </div>
-                <button class="toggle-btn btn-copy" id="copyMcBtn"><i class="bi bi-clipboard"></i> Копировать код</button>
+                <button class="toggle-btn btn-copy" id="copyMcBtn"><i class="bi bi-copy"></i> Копировать код</button>
             </div>
         </div>
 
@@ -520,7 +552,7 @@
 
     <div id="debugOverlay">
         <div>Minecraft Colors v1.0 (debug)</div>
-        <div>XYZ: 42.0 / 7.0 / -13.0</div>
+        <div>XYZ: 42.0 / 52.0 / -67.0</div>
         <div>Chunk: 2 0 -1 in 0 0</div>
         <div>Facing: north (Towards negative Z)</div>
         <div>Client brand: vanilla</div>
@@ -529,9 +561,8 @@
 
     <script>
         (function() {
-            // Easter egg: console message
             console.log("Notch approves this website. 🟩🟩🟩");
-            console.log("%c       \n  ▄▄█▀▀▀▀▀█▄▄  \n ▄█▀      ▀█▄ \n █          █ \n █   ████   █ \n █   █  █   █ \n ▀█▄       ▄█▀ \n  ▀▀█▄▄▄▄▄█▀▀  \n%cCreeper aw man", "color:green;", "color:white;");
+            console.log("%c🟩🟩🟩🟩🟩🟩🟩🟩\n🟩🟩🟩🟩🟩🟩🟩🟩\n🟩⬛⬛🟩🟩⬛⬛🟩\n🟩⬛⬛🟩🟩⬛⬛🟩\n🟩🟩🟩⬛⬛🟩🟩🟩\n🟩🟩⬛⬛⬛⬛🟩🟩\n🟩🟩⬛⬛⬛⬛🟩🟩\n🟩🟩⬛🟩🟩⬛🟩🟩\n%cCreeper aw man", "color:green;", "color:white;");
 
             const mcColors = [
                 { code: '&0', name: 'Чёрный', hex: '#000000' },
@@ -570,8 +601,11 @@
             const colorGrid = document.getElementById('colorGrid');
             const pickerSwatch = document.getElementById('pickerSwatch');
             const hiddenInput = document.getElementById('hiddenColorInput');
+            const pickerInfo = document.getElementById('pickerInfo');
             const infoHex = document.getElementById('infoHex');
+            const infoSection = document.getElementById('infoSection');
             const infoRgb = document.getElementById('infoRgb');
+            const infoUnicode = document.getElementById('infoUnicode');
             const closestMc = document.getElementById('closestMc');
             const copyMcBtn = document.getElementById('copyMcBtn');
             const chatNick = document.getElementById('chatNick');
@@ -585,13 +619,17 @@
 
             let currentHex = '#FF5555';
             let currentTarget = 'msg';
+            let currentMcCode = '&c'; // базовый цветовой код
+            let currentFormats = []; // массив символов стилей, например ['l', 'o']
             let toastTimer = null;
             let zovTimeout = null;
             let herobrineTimeout = null;
+            let sixSevenTimeout = null;
 
-            // Easter egg sequence
-            const secretSequence = ['&f', '&9', '&c'];
-            let sequenceIndex = 0;
+            const secretSequenceZOV = ['&f', '&9', '&c'];
+            const secretSequence67 = ['&6', '&7'];
+            let zovIndex = 0;
+            let sixSevenIndex = 0;
 
             function hexToRgb(hex) {
                 const h = hex.replace('#', '');
@@ -636,6 +674,41 @@
                 }
             }
 
+            function updateCodesDisplay() {
+                const colorChar = currentMcCode.substring(1); // 'c', '6' и т.д.
+                const formatStr = currentFormats.join('');
+                const sectionCode = '§' + colorChar + (formatStr ? currentFormats.map(s => '§' + s).join('') : '');
+                const unicodeCode = '\\u00A7' + colorChar + (formatStr ? currentFormats.map(s => '\\u00A7' + s).join('') : '');
+                infoSection.textContent = sectionCode;
+                infoUnicode.textContent = unicodeCode;
+            }
+
+            function applyFormatsToChat() {
+                chatMsg.classList.remove('bold-text', 'italic-text', 'underline-text', 'strike-text', 'obfuscated-text');
+                currentFormats.forEach(s => {
+                    switch(s) {
+                        case 'l': chatMsg.classList.add('bold-text'); break;
+                        case 'o': chatMsg.classList.add('italic-text'); break;
+                        case 'n': chatMsg.classList.add('underline-text'); break;
+                        case 'm': chatMsg.classList.add('strike-text'); break;
+                        case 'k': chatMsg.classList.add('obfuscated-text'); break;
+                    }
+                });
+            }
+
+            function applyFormat(fc) {
+                if (fc.code === '&r') {
+                    currentFormats = [];
+                } else {
+                    const char = fc.code.substring(1);
+                    if (!currentFormats.includes(char)) {
+                        currentFormats.push(char);
+                    }
+                }
+                updateCodesDisplay();
+                applyFormatsToChat();
+            }
+
             function updateColorTarget() {
                 chatNick.style.color = '';
                 chatMsg.style.color = '';
@@ -657,11 +730,14 @@
                 hiddenInput.value = hex;
                 const rgb = hexToRgb(hex);
                 const rgbStr = `rgb(${rgb.r},${rgb.g},${rgb.b})`;
+                const closest = findClosestMC(hex);
+                currentMcCode = closest.code;
                 infoHex.textContent = hex.toUpperCase();
                 infoRgb.textContent = rgbStr;
-                const closest = findClosestMC(hex);
-                closestMc.innerHTML = `${closest.code} ${closest.name}`;
+                closestMc.textContent = `${closest.code} ${closest.name}`;
+                updateCodesDisplay();
                 updateColorTarget();
+                adjustSwatchSize();
             }
 
             function updateMessage() {
@@ -672,8 +748,7 @@
                 for (let sp of specialMessages) {
                     if (h === sp.hour && m === sp.minute) { message = sp.text; break; }
                 }
-                // Если активна пасхалка "ZOV", не переопределяем
-                if (window.zovActive) return;
+                if (window.zovActive || window.sixSevenActive) return;
                 chatMsg.textContent = message;
             }
 
@@ -688,7 +763,6 @@
             updateClock();
             setInterval(updateClock, 15000);
 
-            // Пасхалка "ZOV" по последовательности цветов
             function triggerZOV() {
                 if (zovTimeout) clearTimeout(zovTimeout);
                 chatMsg.textContent = 'ZOV';
@@ -697,6 +771,17 @@
                     window.zovActive = false;
                     updateMessage();
                     zovTimeout = null;
+                }, 10000);
+            }
+
+            function triggerSixSeven() {
+                if (sixSevenTimeout) clearTimeout(sixSevenTimeout);
+                chatMsg.textContent = 'СИКС СЕВЕН';
+                window.sixSevenActive = true;
+                sixSevenTimeout = setTimeout(() => {
+                    window.sixSevenActive = false;
+                    updateMessage();
+                    sixSevenTimeout = null;
                 }, 10000);
             }
 
@@ -717,17 +802,25 @@
                     `;
                     card.addEventListener('click', () => {
                         updatePicker(mc.hex);
-                        copyText(mc.code);
-
-                        // Проверка последовательности
-                        if (mc.code === secretSequence[sequenceIndex]) {
-                            sequenceIndex++;
-                            if (sequenceIndex === secretSequence.length) {
+                        // Проверка пасхалки ZOV
+                        if (mc.code === secretSequenceZOV[zovIndex]) {
+                            zovIndex++;
+                            if (zovIndex === secretSequenceZOV.length) {
                                 triggerZOV();
-                                sequenceIndex = 0;
+                                zovIndex = 0;
                             }
                         } else {
-                            sequenceIndex = 0;
+                            zovIndex = 0;
+                        }
+                        // Проверка пасхалки 6 7
+                        if (mc.code === secretSequence67[sixSevenIndex]) {
+                            sixSevenIndex++;
+                            if (sixSevenIndex === secretSequence67.length) {
+                                triggerSixSeven();
+                                sixSevenIndex = 0;
+                            }
+                        } else {
+                            sixSevenIndex = 0;
                         }
                     });
                     colorGrid.appendChild(card);
@@ -746,7 +839,7 @@
                                 <span class="format-code">${fc.code}</span>
                                 <span class="format-desc">${fc.name}</span>
                             </div>
-                            <button class="copy-icon-btn" title="Копировать"><i class="bi bi-clipboard"></i></button>
+                            <button class="copy-icon-btn" title="Копировать"><i class="bi bi-copy"></i></button>
                         </div>
                         <div class="format-preview${previewClass}">${fc.preview}</div>
                     `;
@@ -755,12 +848,13 @@
                         e.stopPropagation();
                         copyText(fc.code);
                     });
-                    card.addEventListener('click', () => copyText(fc.code));
+                    card.addEventListener('click', () => {
+                        applyFormat(fc);
+                    });
                     formatGrid.appendChild(card);
                 });
             }
 
-            // Пасхалка с ником (двойной клик)
             chatNick.addEventListener('dblclick', () => {
                 if (herobrineTimeout) clearTimeout(herobrineTimeout);
                 chatNick.textContent = 'Herobrine';
@@ -770,7 +864,6 @@
                 }, 10000);
             });
 
-            // Пасхалка со стрелкой
             chatArrow.addEventListener('click', () => {
                 chatArrow.innerHTML = '<i class="bi bi-minecart"></i>';
                 setTimeout(() => {
@@ -778,7 +871,6 @@
                 }, 1000);
             });
 
-            // Режим F3
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'F3' || e.keyCode === 114) {
                     e.preventDefault();
@@ -790,7 +882,6 @@
                     debugOverlay.style.display = 'none';
                 }
             });
-            // Долгий тап по заголовку для мобильных
             const headerTitle = document.querySelector('.header h1');
             let pressTimer;
             headerTitle.addEventListener('touchstart', () => {
@@ -802,7 +893,6 @@
             headerTitle.addEventListener('touchend', () => clearTimeout(pressTimer));
             headerTitle.addEventListener('touchmove', () => clearTimeout(pressTimer));
 
-            // Переключение цели
             toggleButtons.forEach(btn => {
                 btn.addEventListener('click', () => {
                     const target = btn.getAttribute('data-target');
@@ -814,20 +904,36 @@
             });
 
             copyMcBtn.addEventListener('click', () => {
-                const closest = findClosestMC(currentHex);
-                copyText(closest.code);
+                copyText(currentMcCode);
+            });
+
+            document.querySelectorAll('.info-copy-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const valueSpan = btn.parentElement.querySelector('span');
+                    if (valueSpan) copyText(valueSpan.textContent);
+                });
             });
 
             pickerSwatch.addEventListener('click', () => hiddenInput.click());
             hiddenInput.addEventListener('input', () => updatePicker(hiddenInput.value));
             hiddenInput.addEventListener('change', () => updatePicker(hiddenInput.value));
 
-            [infoHex, infoRgb].forEach(el => {
-                el.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    const val = el.textContent;
-                    if (val) copyText(val);
-                });
+            function adjustSwatchSize() {
+                const infoLines = pickerInfo.querySelectorAll('.info-line');
+                if (infoLines.length < 3) return;
+                const firstLine = infoLines[0];
+                const thirdLine = infoLines[2];
+                const totalHeight = (thirdLine.offsetTop + thirdLine.offsetHeight) - firstLine.offsetTop;
+                if (totalHeight > 0) {
+                    pickerSwatch.style.width = totalHeight + 'px';
+                    pickerSwatch.style.height = totalHeight + 'px';
+                }
+            }
+
+            window.addEventListener('resize', adjustSwatchSize);
+            window.addEventListener('load', () => {
+                adjustSwatchSize();
             });
 
             buildColors();
@@ -835,8 +941,9 @@
             updatePicker('#FF5555');
             updateColorTarget();
             updateMessage();
+            applyFormatsToChat();
+            setTimeout(adjustSwatchSize, 0);
 
-            // Обфускация
             const obfEls = document.querySelectorAll('.obfuscated-text');
             if (obfEls.length) {
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';

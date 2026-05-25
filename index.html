@@ -476,15 +476,17 @@
             }
         }
 
+        @media (max-width: 560px) {
+            .format-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
         @media (max-width: 500px) {
             .color-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 6px;
             }
-            .format-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-
             .info-label {
                 font-size: 0.45rem;
                 width: 50px;

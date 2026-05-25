@@ -97,15 +97,7 @@
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
         }
-        @media (max-width: 500px) {
-            .color-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            .format-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
+        
         .color-card {
             background: #2a2a2a;
             border: 1px solid #3f3f3f;
@@ -142,6 +134,10 @@
             font-size: 0.6rem;
             color: #ffffff;
             text-shadow: 1px 1px 0 #000;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 110px;
         }
         .color-hex {
             font-size: 0.58rem;
@@ -217,9 +213,9 @@
             gap: 8px;
         }
         .info-label {
-            font-size: 0.45rem;
+            font-size: 0.7rem;
+            width: 70px;
             color: #ffffff;
-            width: 50px;
             text-transform: uppercase;
         }
         .info-value {
@@ -471,6 +467,28 @@
             pointer-events: none;
             width: 0;
             height: 0;
+        }
+
+        @media (max-width: 500px) {
+            .color-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .format-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            .info-label {
+                font-size: 0.45rem;
+                width: 50px;
+            }
+        }
+
+        @media (max-width: 666px) {
+            .color-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
         }
     </style>
 </head>

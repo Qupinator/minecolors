@@ -3,20 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>Minecraft Colors & Styles</title>
-    
-    <meta http-equiv="content-language" content="ru">
+    <title>Minecraft Color Codes & Formatting — &c &e &l &o</title>
+    <meta name="description" content="Все коды цветов и форматирования Minecraft: &c красный, &e жёлтый, &l жирный, &o курсив. Копируй готовые комбинации для чата, табличек, серверов.">
+    <meta name="keywords" content="minecraft color codes, майнкрафт коды цветов, &c, &e, &l, &o, &n, &m, &k, форматирование майнкрафт, Qupinator">
     <meta name="author" content="Qupinator">
-    <meta name="keywords" content="коды майнкрафт, minecraft color codes, форматирование текста, &c, &e, &l, &o, &n, &m, &k, цвета майнкрафт, Qupinator">
-    <meta name="description" content="Полный список кодов форматирования текста в Minecraft (Java и Bedrock). Узнай, как сделать текст цветным, жирным, курсивным и не только. Примеры: &c красный, &e жёлтый, &l жирный.">
-    <meta property="og:title" content="Коды форматирования Minecraft — цвета и стили">
-    <meta property="og:description" content="Как раскрасить и оформить текст в Minecraft? Все коды: &c, &e, &l, &o, &n и многие другие.">
-    <meta property="og:image" content="https://qupinator.github.io/minecolors/favicon.ico">
-    <meta property="og:image:width" content="1280">
-    <meta property="og:image:height" content="1280">
+
+    <!-- Open Graph для Telegram, Discord, VK -->
+    <meta property="og:title" content="Minecraft Color Codes & Formatting">
+    <meta property="og:description" content="Список всех цветовых и стилевых кодов Minecraft. Копируй &c, &e, &l, &o и другие.">
+    <meta property="og:image" content="https://qupinator.github.io/minecolors/favicon.png">
+    <meta property="og:image:width" content="256">
+    <meta property="og:image:height" content="256">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://qupinator.github.io/">
-    
+    <meta property="og:url" content="https://qupinator.github.io/minecolors/">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Minecraft Color Codes & Formatting">
+    <meta name="twitter:description" content="Все коды цветов и форматирования Minecraft: &c красный, &e жёлтый, &l жирный. Копируй и используй!">
+    <meta name="twitter:image" content="https://qupinator.github.io/minecolors/favicon.png">
+
+    <!-- JSON-LD структурированные данные -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Minecraft Colors & Styles",
+      "url": "https://qupinator.github.io/minecolors/",
+      "description": "Полный список кодов форматирования текста в Minecraft. Примеры: &c красный, &e жёлтый, &l жирный.",
+      "applicationCategory": "Utilities",
+      "operatingSystem": "All"
+    }
+    </script>
+
     <link rel="icon" href="favicon.ico">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <style>
@@ -25,6 +44,7 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Minecraft';
+            -webkit-tap-highlight-color: transparent;
         }
         
         @font-face {
@@ -111,9 +131,7 @@
             gap: 6px;
             text-align: left;
         }
-        .color-card:hover {
-            background: #333;
-        }
+        .color-card:hover { background: #333; }
         .color-info {
             flex: 1;
             display: flex;
@@ -148,11 +166,9 @@
             width: 32px;
             height: 32px;
             border-radius: 5px;
-            border: 0px solid #555;
             flex-shrink: 0;
         }
 
-        /* Палитра */
         .picker-row {
             display: flex;
             gap: 12px;
@@ -176,7 +192,7 @@
             align-items: center;
             justify-content: center;
         }
-        .pencil-icon {
+        .gear-icon {
             font-size: 3rem;
             color: #fff;
             opacity: 0.9;
@@ -186,6 +202,7 @@
         }
         .closest-mc {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             width: 100%;
@@ -196,11 +213,13 @@
             padding: 6px 5px;
             border-radius: 3px;
             border: 1px solid #3a3a3a;
-            white-space: nowrap;
+            white-space: normal;
             overflow: hidden;
             text-overflow: ellipsis;
-            height: 30px;
+            height: auto;
+            gap: 2px;
         }
+        .closest-mc span { display: block; line-height: 1.2; }
         .picker-info {
             flex: 1;
             display: flex;
@@ -224,17 +243,15 @@
             justify-content: space-between;
             align-items: center;
             background: #1e1e1e;
-            padding: 6px 10px;
+            padding: 6px 6px 6px 10px;
             border-radius: 3px;
             border: 1px solid #3a3a3a;
             color: #ffffff;
             font-size: 0.55rem;
             word-break: break-all;
+            max-height: 31px;
         }
-        .info-value span {
-            flex: 1;
-            text-align: left;
-        }
+        .info-value span { flex: 1; text-align: left; }
         .info-copy-btn {
             background: transparent;
             border: none;
@@ -247,11 +264,8 @@
             flex-shrink: 0;
             margin-left: 6px;
         }
-        .info-copy-btn:hover {
-            color: #ffd966;
-        }
+        .info-copy-btn:hover { color: #ffd966; }
 
-        /* Чат */
         .chat-preview {
             background: #111;
             border: 1px solid #3a3a3a;
@@ -267,34 +281,17 @@
             align-items: baseline;
             gap: 2px;
         }
-        .chat-time {
-            color: #aaa;
-            margin-right: 4px;
-        }
-        .chat-nick {
-            transition: color 0.2s;
-            cursor: default;
-        }
-        .chat-arrow {
-            margin: 0 4px;
-            color: #555555;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .chat-msg {
-            transition: color 0.2s;
-        }
+        .chat-time { color: #aaa; margin-right: 4px; }
+        .chat-nick { transition: color 0.2s; cursor: default; }
+        .chat-arrow { margin: 0 4px; color: #555555; cursor: pointer; transition: 0.2s; }
+        .chat-msg { transition: color 0.2s; }
+
         .bold-text { font-weight: bolder; }
         .italic-text { font-style: italic; }
         .underline-text { text-decoration: underline; }
         .strike-text { text-decoration: line-through; }
         .obfuscated-text {
             letter-spacing: 0;
-            animation: obfuscate 0.1s steps(1) infinite;
-        }
-        @keyframes obfuscate {
-            0% { opacity: 1; }
-            100% { opacity: 0.8; }
         }
 
         .toggle-toolbar {
@@ -305,12 +302,7 @@
             justify-content: space-between;
             flex-wrap: wrap;
         }
-        
-        .toggle-toolbar .color-row {
-            display: flex;
-            gap: 8px;
-        }
-        
+        .toggle-toolbar .color-row { display: flex; gap: 8px; }
         .toggle-btn {
             font-size: 0.7rem;
             padding: 6px 12px;
@@ -333,22 +325,11 @@
             border-color: #ffd966;
             font-weight: bold;
         }
-        .toggle-btn:hover {
-            background: #3f3f3f;
-        }
-        .toggle-btn.active:hover {
-            background: #ffd966;
-        }
-        .btn-copy {
-            background: #2d2d2d;
-            color: #ffffff;
-            border: 1px solid #4a4a4a;
-        }
-        .btn-copy:hover {
-            background: #3f3f3f;
-        }
+        .toggle-btn:hover { background: #3f3f3f; }
+        .toggle-btn.active:hover { background: #ffd966; }
+        .btn-copy { background: #2d2d2d; color: #ffffff; border: 1px solid #4a4a4a; }
+        .btn-copy:hover { background: #3f3f3f; }
 
-        /* Форматирование */
         .format-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -363,22 +344,14 @@
             flex-direction: column;
             gap: 6px;
             transition: background 0.15s;
-            position: relative;
         }
-        .format-card:hover {
-            background: #333;
-        }
+        .format-card:hover { background: #333; }
         .format-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
-        .format-code-name {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-            flex-wrap: wrap;
-        }
+        .format-code-name { display: flex; align-items: baseline; gap: 6px; flex-wrap: wrap; }
         .format-code {
             font-size: 0.8rem;
             color: #ffffff;
@@ -387,10 +360,7 @@
             border-radius: 2px;
             letter-spacing: 0.6px;
         }
-        .format-desc {
-            font-size: 0.6rem;
-            color: #ffffff;
-        }
+        .format-desc { font-size: 0.6rem; color: #ffffff; }
         .copy-icon-btn {
             background: transparent;
             border: none;
@@ -405,10 +375,7 @@
             justify-content: center;
             border-radius: 2px;
         }
-        .copy-icon-btn:hover {
-            color: #ffd966;
-            background: #333;
-        }
+        .copy-icon-btn:hover { color: #ffd966; background: #333; }
         .format-preview {
             font-size: 0.8rem;
             padding: 4px 6px;
@@ -437,18 +404,13 @@
             transition: transform 0.2s, opacity 0.2s;
             pointer-events: none;
         }
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
         #debugOverlay {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: rgba(0,0,0,0.8);
             color: #0f0;
             font-family: 'Minecraft', monospace;
@@ -461,36 +423,100 @@
             line-height: 1.4;
         }
 
-        #hiddenColorInput {
+        .color-picker-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        .color-picker-modal.active { display: flex; }
+        .modal-content {
+            background: #2a2a2a;
+            border: 2px solid #4a4a4a;
+            border-radius: 8px;
+            padding: 20px;
+            width: 90%;
+            max-width: 420px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .modal-title {
+            font-size: 0.7rem;
+            color: #ffd966;
+            text-align: center;
+            text-shadow: 2px 2px 0 #000;
+        }
+        .picker-area { display: flex; gap: 16px; align-items: center; }
+        .color-preview-large {
+            width: 100px; height: 100px;
+            border-radius: 4px;
+            border: 2px solid #555;
+            cursor: pointer;
+            flex-shrink: 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .color-preview-large .gear-icon { font-size: 2rem; }
+        .input-column { flex: 1; display: flex; flex-direction: column; gap: 12px; }
+        .input-group { display: flex; align-items: center; gap: 6px; }
+        .input-group label { font-size: 0.7rem; width: 36px; color: #ccc; }
+        .input-group input {
+            flex: 1;
+            background: #1e1e1e;
+            border: 1px solid #3a3a3a;
+            color: #fff;
+            padding: 6px 10px;
+            border-radius: 3px;
+            font-size: 0.7rem;
+            font-family: 'Minecraft', monospace;
+            height: 30px;
+            outline: none;
+        }
+        .rgb-inputs { display: flex; gap: 4px; flex: 1; }
+        .rgb-inputs input { width: 33.33%; text-align: center; }
+        .modal-buttons { display: flex; gap: 10px; justify-content: flex-end; }
+        .modal-btn {
+            font-size: 0.55rem;
+            padding: 8px 16px;
+            background: #3a3a3a;
+            border: 1px solid #5a5a5a;
+            color: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.15s;
+        }
+        .modal-btn:hover { background: #4a4a4a; }
+        .modal-btn.primary {
+            background: #ffd966;
+            color: #1a1a1a;
+            border-color: #ffd966;
+            font-weight: bold;
+        }
+
+        #hiddenColorInput, #modalColorInput {
             position: absolute;
             opacity: 0;
             pointer-events: none;
-            width: 0;
-            height: 0;
+            width: 0; height: 0;
         }
 
         @media (max-width: 666px) {
-            .color-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 6px;
-            }
+            .color-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
         }
-
         @media (max-width: 560px) {
-            .format-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
+            .format-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
-
         @media (max-width: 500px) {
-            .color-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 6px;
-            }
-            .info-label {
-                font-size: 0.45rem;
-                width: 50px;
-            }
+            .color-grid { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+            .info-label { font-size: 0.45rem; width: 50px; }
+            .color-preview-large { width: 80px; height: 80px; }
         }
     </style>
 </head>
@@ -510,10 +536,12 @@
             <div class="section-title">🎨 Палитра и чат</div>
             <div class="picker-row">
                 <div class="picker-swatch-area">
-                    <div class="picker-swatch" id="pickerSwatch" title="Выбрать цвет">
-                        <i class="bi bi-pencil pencil-icon"></i>
+                    <div class="picker-swatch" id="pickerSwatch" title="Открыть выбор цвета">
+                        <i class="bi bi-gear gear-icon"></i>
                     </div>
-                    <div class="closest-mc" id="closestMc">&c Красный</div>
+                    <div class="closest-mc" id="closestMc">
+                        <span>&c</span><span>Красный</span>
+                    </div>
                 </div>
                 <div class="picker-info" id="pickerInfo">
                     <div class="info-line">
@@ -567,7 +595,38 @@
         </div>
     </div>
 
+    <!-- Модальное окно выбора цвета -->
+    <div id="colorPickerModal" class="color-picker-modal">
+        <div class="modal-content">
+            <div class="modal-title">Выбор цвета</div>
+            <div class="picker-area">
+                <div class="color-preview-large" id="modalColorPreview" title="Нажмите, чтобы открыть палитру">
+                    <i class="bi bi-pencil gear-icon"></i>
+                </div>
+                <div class="input-column">
+                    <div class="input-group">
+                        <label>HEX</label>
+                        <input type="text" id="modalHexInput" maxlength="7" placeholder="#FF5555">
+                    </div>
+                    <div class="input-group">
+                        <label>RGB</label>
+                        <div class="rgb-inputs">
+                            <input style="border-bottom:1px solid #FF5555" type="number" id="modalR" min="0" max="255" placeholder="255">
+                            <input style="border-bottom:1px solid #55FF55" type="number" id="modalG" min="0" max="255" placeholder="85">
+                            <input style="border-bottom:1px solid #5555FF" type="number" id="modalB" min="0" max="255" placeholder="85">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn" id="modalCancel">Отмена</button>
+                <button class="modal-btn primary" id="modalApply">Применить</button>
+            </div>
+        </div>
+    </div>
+
     <input type="color" id="hiddenColorInput" value="#ff5555">
+    <input type="color" id="modalColorInput" value="#ff5555">
     <div class="toast" id="toast">Скопировано!</div>
 
     <div id="debugOverlay">
@@ -637,14 +696,25 @@
             const toggleButtons = document.querySelectorAll('.toggle-btn[data-target]');
             const debugOverlay = document.getElementById('debugOverlay');
 
+            const colorPickerModal = document.getElementById('colorPickerModal');
+            const modalColorPreview = document.getElementById('modalColorPreview');
+            const modalHexInput = document.getElementById('modalHexInput');
+            const modalR = document.getElementById('modalR');
+            const modalG = document.getElementById('modalG');
+            const modalB = document.getElementById('modalB');
+            const modalApply = document.getElementById('modalApply');
+            const modalCancel = document.getElementById('modalCancel');
+            const modalColorInput = document.getElementById('modalColorInput');
+
             let currentHex = '#FF5555';
             let currentTarget = 'msg';
-            let currentMcCode = '&c'; // базовый цветовой код
-            let currentFormats = []; // массив символов стилей, например ['l', 'o']
+            let currentMcCode = '&c';
+            let currentFormats = [];
             let toastTimer = null;
             let zovTimeout = null;
             let herobrineTimeout = null;
             let sixSevenTimeout = null;
+            let obfuscateInterval = null;
 
             const secretSequenceZOV = ['&f', '&9', '&c'];
             const secretSequence67 = ['&6', '&7'];
@@ -658,6 +728,13 @@
                     g: parseInt(h.substring(2, 4), 16),
                     b: parseInt(h.substring(4, 6), 16)
                 };
+            }
+
+            function rgbToHex(r, g, b) {
+                return '#' + [r, g, b].map(x => {
+                    const v = Math.max(0, Math.min(255, Math.round(x)));
+                    return v.toString(16).padStart(2, '0');
+                }).join('').toUpperCase();
             }
 
             function findClosestMC(hex) {
@@ -694,13 +771,75 @@
                 }
             }
 
+            function updateModalFromHex(hex) {
+                const rgb = hexToRgb(hex);
+                modalColorPreview.style.background = hex;
+                modalHexInput.value = hex;
+                modalR.value = rgb.r;
+                modalG.value = rgb.g;
+                modalB.value = rgb.b;
+                modalColorInput.value = hex;
+            }
+
+            function updateModalFromRgb() {
+                const r = parseInt(modalR.value) || 0;
+                const g = parseInt(modalG.value) || 0;
+                const b = parseInt(modalB.value) || 0;
+                const hex = rgbToHex(r, g, b);
+                modalColorPreview.style.background = hex;
+                modalHexInput.value = hex;
+                modalColorInput.value = hex;
+            }
+
+            function openColorPickerModal() {
+                updateModalFromHex(currentHex);
+                colorPickerModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeColorPickerModal(save = false) {
+                colorPickerModal.classList.remove('active');
+                document.body.style.overflow = '';
+                if (save) {
+                    const hex = modalHexInput.value.trim();
+                    if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+                        updatePicker(hex.toUpperCase());
+                    } else {
+                        showToast('Неверный HEX');
+                    }
+                }
+            }
+
+            modalColorPreview.addEventListener('click', () => modalColorInput.click());
+            modalColorInput.addEventListener('input', () => {
+                const hex = modalColorInput.value.toUpperCase();
+                updateModalFromHex(hex);
+            });
+            modalHexInput.addEventListener('input', () => {
+                const val = modalHexInput.value.trim();
+                if (/^#[0-9A-Fa-f]{6}$/.test(val)) {
+                    updateModalFromHex(val.toUpperCase());
+                }
+            });
+            [modalR, modalG, modalB].forEach(input => {
+                input.addEventListener('input', updateModalFromRgb);
+            });
+            modalApply.addEventListener('click', () => closeColorPickerModal(true));
+            modalCancel.addEventListener('click', () => closeColorPickerModal(false));
+            pickerSwatch.addEventListener('click', openColorPickerModal);
+
             function updateCodesDisplay() {
-                const colorChar = currentMcCode.substring(1); // 'c', '6' и т.д.
+                const colorChar = currentMcCode.substring(1);
                 const formatStr = currentFormats.join('');
                 const sectionCode = '§' + colorChar + (formatStr ? currentFormats.map(s => '§' + s).join('') : '');
                 const unicodeCode = '\\u00A7' + colorChar + (formatStr ? currentFormats.map(s => '\\u00A7' + s).join('') : '');
                 infoSection.textContent = sectionCode;
                 infoUnicode.textContent = unicodeCode;
+
+                const closest = findClosestMC(currentHex);
+                const displayFormats = currentFormats.map(s => '&' + s).join('');
+                const codesLine = displayFormats ? `${currentMcCode}${displayFormats}` : currentMcCode;
+                closestMc.innerHTML = `<span>${codesLine}</span><span>${closest.name}</span>`;
             }
 
             function applyFormatsToChat() {
@@ -714,6 +853,32 @@
                         case 'k': chatMsg.classList.add('obfuscated-text'); break;
                     }
                 });
+
+                if (currentFormats.includes('k')) {
+                    if (!obfuscateInterval) {
+                        chatMsg.setAttribute('data-original', chatMsg.textContent);
+                        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+                        obfuscateInterval = setInterval(() => {
+                            if (chatMsg.classList.contains('obfuscated-text')) {
+                                const orig = chatMsg.getAttribute('data-original');
+                                let str = '';
+                                for (let i = 0; i < orig.length; i++) {
+                                    str += chars[Math.floor(Math.random() * chars.length)];
+                                }
+                                chatMsg.textContent = str;
+                            }
+                        }, 80);
+                    }
+                } else {
+                    if (obfuscateInterval) {
+                        clearInterval(obfuscateInterval);
+                        obfuscateInterval = null;
+                        if (chatMsg.hasAttribute('data-original')) {
+                            chatMsg.textContent = chatMsg.getAttribute('data-original');
+                            chatMsg.removeAttribute('data-original');
+                        }
+                    }
+                }
             }
 
             function applyFormat(fc) {
@@ -721,9 +886,20 @@
                     currentFormats = [];
                 } else {
                     const char = fc.code.substring(1);
+                    if (char === 'n' && currentFormats.includes('m')) {
+                        currentFormats = currentFormats.filter(s => s !== 'm');
+                    } else if (char === 'm' && currentFormats.includes('n')) {
+                        currentFormats = currentFormats.filter(s => s !== 'n');
+                    }
                     if (!currentFormats.includes(char)) {
                         currentFormats.push(char);
                     }
+                }
+                // Сортировка: 'l' в начало после цвета
+                const lIndex = currentFormats.indexOf('l');
+                if (lIndex > 0) {
+                    currentFormats.splice(lIndex, 1);
+                    currentFormats.unshift('l');
                 }
                 updateCodesDisplay();
                 applyFormatsToChat();
@@ -754,7 +930,6 @@
                 currentMcCode = closest.code;
                 infoHex.textContent = hex.toUpperCase();
                 infoRgb.textContent = rgbStr;
-                closestMc.textContent = `${closest.code} ${closest.name}`;
                 updateCodesDisplay();
                 updateColorTarget();
                 adjustSwatchSize();
@@ -769,7 +944,10 @@
                     if (h === sp.hour && m === sp.minute) { message = sp.text; break; }
                 }
                 if (window.zovActive || window.sixSevenActive) return;
-                chatMsg.textContent = message;
+                if (!currentFormats.includes('k')) {
+                    chatMsg.textContent = message;
+                }
+                chatMsg.setAttribute('data-original', message);
             }
 
             function updateClock() {
@@ -785,6 +963,7 @@
 
             function triggerZOV() {
                 if (zovTimeout) clearTimeout(zovTimeout);
+                if (obfuscateInterval) { clearInterval(obfuscateInterval); obfuscateInterval = null; }
                 chatMsg.textContent = 'ZOV';
                 window.zovActive = true;
                 zovTimeout = setTimeout(() => {
@@ -796,6 +975,7 @@
 
             function triggerSixSeven() {
                 if (sixSevenTimeout) clearTimeout(sixSevenTimeout);
+                if (obfuscateInterval) { clearInterval(obfuscateInterval); obfuscateInterval = null; }
                 chatMsg.textContent = 'СИКС СЕВЕН';
                 window.sixSevenActive = true;
                 sixSevenTimeout = setTimeout(() => {
@@ -822,7 +1002,6 @@
                     `;
                     card.addEventListener('click', () => {
                         updatePicker(mc.hex);
-                        // Проверка пасхалки ZOV
                         if (mc.code === secretSequenceZOV[zovIndex]) {
                             zovIndex++;
                             if (zovIndex === secretSequenceZOV.length) {
@@ -832,7 +1011,6 @@
                         } else {
                             zovIndex = 0;
                         }
-                        // Проверка пасхалки 6 7
                         if (mc.code === secretSequence67[sixSevenIndex]) {
                             sixSevenIndex++;
                             if (sixSevenIndex === secretSequence67.length) {
@@ -924,7 +1102,8 @@
             });
 
             copyMcBtn.addEventListener('click', () => {
-                copyText(currentMcCode);
+                const formatPrefix = currentFormats.map(s => '&' + s).join('');
+                copyText(currentMcCode + formatPrefix);
             });
 
             document.querySelectorAll('.info-copy-btn').forEach(btn => {
@@ -934,10 +1113,6 @@
                     if (valueSpan) copyText(valueSpan.textContent);
                 });
             });
-
-            pickerSwatch.addEventListener('click', () => hiddenInput.click());
-            hiddenInput.addEventListener('input', () => updatePicker(hiddenInput.value));
-            hiddenInput.addEventListener('change', () => updatePicker(hiddenInput.value));
 
             function adjustSwatchSize() {
                 const infoLines = pickerInfo.querySelectorAll('.info-line');
@@ -963,22 +1138,6 @@
             updateMessage();
             applyFormatsToChat();
             setTimeout(adjustSwatchSize, 0);
-
-            const obfEls = document.querySelectorAll('.obfuscated-text');
-            if (obfEls.length) {
-                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-                setInterval(() => {
-                    obfEls.forEach(el => {
-                        const original = el.getAttribute('data-original') || el.textContent;
-                        if (!el.getAttribute('data-original')) el.setAttribute('data-original', original);
-                        let str = '';
-                        for (let i = 0; i < original.length; i++) {
-                            str += chars[Math.floor(Math.random() * chars.length)];
-                        }
-                        el.textContent = str;
-                    });
-                }, 80);
-            }
         })();
     </script>
 </body>

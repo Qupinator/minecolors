@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://qupinator.github.io/minecolors/sitemap.xml
